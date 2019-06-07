@@ -57,8 +57,6 @@ else
 	# the most up-to-date information.
 	rm -f "README.md" "CONTRIBUTING.md"
 
-	echo "${VERSION},latest" > .tags
-
 	# Perform initial commit with the current directory as is (ie. prepared for
 	# the new version branch).
 	echo "Committing changes"
