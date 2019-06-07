@@ -1,13 +1,20 @@
 kind: pipeline
 name: default
 
-workspace:
-  base: /app
-  path: src/github.com/omropfryslan/docker-atlassian-jira
-
 steps:
-  - name: build-and-update
-    image: circleci/ruby
-    commands:
-      - bin/prepare
-      - docker build .
+- name: build-and-update
+  image: docker
+  privileged: true
+  commands:
+    - apk add --no-cache --update curl git
+    - bin/prepare
+    - docker build .
+    - bin/deploy
+  volumes:
+    - name: docker
+      path: /var/run/docker.sock
+
+volumes:
+- name: docker
+  host:
+    path: /var/run/docker.sock
